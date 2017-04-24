@@ -64,7 +64,7 @@ class TripList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        trips: state.tripsReducer
+        trips: state.trips
     };
 };
 
