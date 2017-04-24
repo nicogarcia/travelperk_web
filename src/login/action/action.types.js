@@ -28,3 +28,28 @@ export const loginFailure = (error) => (
         }
     }
 );
+
+export const requestLogin = (email, password) => {
+    return dispatch => {
+        dispatch(loginRequest(email, password));
+
+        let fetchPromise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                    if (email === 'travelperk') {
+                        resolve({
+                            token: 'asdfasdfasdfasdfasdf'
+                        })
+                    } else {
+                        reject({})
+                    }
+                },
+                1000
+            );
+        });
+
+        fetchPromise.then(res => dispatch(loginSuccess(res)));
+        fetchPromise.catch(res => dispatch(loginFailure(res)));
+
+        return fetchPromise;
+    }
+};
