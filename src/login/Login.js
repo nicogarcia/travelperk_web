@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Button, Form, FormGroup, Input, Label} from "reactstrap";
+import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 import {Redirect} from "react-router";
 import {connect} from "react-redux";
 import {requestLogin} from "./action/action.types";
@@ -61,6 +61,12 @@ class Login extends Component {
                                 <Input id="password" type="password" name="password" placeholder="Type your password"
                                        value={this.state.password} onChange={this.handlePasswordChange}/>
                             </FormGroup>
+
+                            {
+                                login.hasFailed ? (
+                                    <Alert color="danger">Email or password incorrect</Alert>
+                                ) : ''
+                            }
 
                             <Button
                                 color="primary"
