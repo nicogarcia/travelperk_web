@@ -47,8 +47,9 @@ export const requestLogin = (email, password) => {
             );
         });
 
-        fetchPromise.then(res => dispatch(loginSuccess(res)));
-        fetchPromise.catch(res => dispatch(loginFailure(res)));
+        fetchPromise
+            .then(res => dispatch(loginSuccess(res)))
+            .catch(res => dispatch(loginFailure(res)));
 
         return fetchPromise;
     }

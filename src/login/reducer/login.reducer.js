@@ -7,20 +7,18 @@ const initialState = {
     hasFailed: false
 };
 
-const loginReducer = (state = initialState, action) => {
+export const loginReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_REQUEST:
-            return Object.assign({}, {email: action.payload.email, isPending: true, token: null});
+            return Object.assign({}, {email: action.payload.email, isPending: true, token: null, hasFailed: false});
 
         case LOGIN_SUCCESS:
             return Object.assign({}, state, {isPending: false, token: action.payload.token, hasFailed: false});
 
         case LOGIN_FAILURE:
-            return Object.assign({}, state, {isPending: false, hasFailed: true});
+            return Object.assign({}, state, {email: null, token: null, isPending: false, hasFailed: true});
 
         default:
             return state;
     }
 };
-
-export default loginReducer;
