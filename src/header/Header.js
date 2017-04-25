@@ -2,21 +2,29 @@ import React, {Component} from "react";
 import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from "reactstrap";
 import {Link} from "react-router-dom";
 import logo from "./travelperk-logo-dark.svg";
+import {connect} from "react-redux";
+import {logoutRequest} from "../auth/action/auth.action";
 
 class Header extends Component {
     constructor(props) {
         super(props);
 
-        this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false
         };
+
+        this.toggle = this.toggle.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
+    }
+
+    logout() {
+        this.props.dispatch(logoutRequest())
     }
 
     render() {
@@ -34,6 +42,13 @@ class Header extends Component {
                             <NavItem>
                                 <NavLink tag={Link} to="/trips">Trips</NavLink>
                             </NavItem>
+                            {
+                                this.props.login.token ?
+                                    <NavItem>
+                                        <NavLink onClick={this.logout} href="#">Logout</NavLink>
+                                    </NavItem> :
+                                    ''
+                            }
                         </Nav>
                     </Collapse>
                 </Navbar>
@@ -42,6 +57,12 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = (state) => (
+    {
+        login: state.login
+    }
+);
+
+export default connect(mapStateToProps)(Header);
 
 
