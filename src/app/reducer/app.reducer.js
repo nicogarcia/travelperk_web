@@ -1,4 +1,4 @@
-import {tripsReducer} from "../../trips/reducer/trips.reducer";
+import {tripsReducer} from "../../trip/reducer/trips.reducer";
 import {loginReducer} from "../../login/reducer/login.reducer";
 import {combineReducers} from "redux";
 

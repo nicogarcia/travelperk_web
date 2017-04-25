@@ -4,7 +4,7 @@ import PrivateRoute from "./router/PrivateRoute";
 
 import Header from "../header/Header";
 import Login from "../login/Login";
-import Trips from "../trips/TripList";
+import Trips from "../trip/TripList";
 
 import "./App.css";
 
