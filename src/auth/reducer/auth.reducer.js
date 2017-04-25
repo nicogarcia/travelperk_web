@@ -1,4 +1,4 @@
-import {LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS} from "../action/action.types";
+import {LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST} from "../action/auth.action";
 
 const initialState = {
     email: null,
@@ -17,6 +17,9 @@ export const loginReducer = (state = initialState, action) => {
 
         case LOGIN_FAILURE:
             return Object.assign({}, state, {email: null, token: null, isPending: false, hasFailed: true});
+
+        case LOGOUT_REQUEST:
+            return Object.assign({}, initialState);
 
         default:
             return state;

@@ -29,6 +29,13 @@ export const loginFailure = (error) => (
     }
 );
 
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const logoutRequest = () => (
+    {
+        type: LOGOUT_REQUEST
+    }
+);
+
 export const requestLogin = (email, password) => {
     return dispatch => {
         dispatch(loginRequest(email, password));
