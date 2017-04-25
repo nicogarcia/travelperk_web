@@ -17,11 +17,14 @@ export function tripsReducer(state = initialState, action) {
         case CREATE_TRIP:
             let id = action.payload.id;
 
-            if (state[id]) {
+            if (state.items[id]) {
                 return state;
             }
 
-            return Object.assign({}, state, {items: {[id]: action.payload}});
+            let items = state.items;
+            items[id] = action.payload;
+
+            return Object.assign({}, state, {items: items});
 
         case REMOVE_TRIP:
             let stateCopy = Object.assign({}, state);
