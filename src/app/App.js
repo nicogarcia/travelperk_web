@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Redirect, Route} from "react-router";
+import {Redirect, Route, Switch} from "react-router";
 import PrivateRoute from "./router/PrivateRoute";
 
 import Header from "../header/Header";
@@ -16,8 +16,10 @@ class App extends Component {
 
                 <Redirect to="/trips"/>
 
-                <Route path="/login" component={Login}/>
-                <PrivateRoute path="/trips" component={Trips}/>
+                <Switch>
+                    <Route path="/login" component={Login}/>
+                    <PrivateRoute path="/trips" component={Trips}/>
+                </Switch>
             </div>
         );
     }
