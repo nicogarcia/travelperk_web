@@ -29,30 +29,27 @@ class Header extends Component {
 
     render() {
         return (
-            <div className="container">
-                <Navbar color="faded" light toggleable>
-                    <NavbarToggler right onClick={this.toggle}/>
+            <Navbar color="faded" light toggleable>
+                <NavbarToggler right onClick={this.toggle}/>
 
-                    <NavbarBrand tag={Link} to="/trips">
-                        <img src={logo} alt="Travelperk"/>
-                    </NavbarBrand>
+                <NavbarBrand tag={Link} to="/trips">
+                    <img src={logo} alt="Travelperk"/>
+                </NavbarBrand>
 
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
+                <Collapse isOpen={this.state.isOpen} navbar>
+                    <Nav className="ml-auto" navbar>
+                        <NavItem>
+                            <NavLink tag={Link} to="/trips">Trips</NavLink>
+                        </NavItem>
+                        {
+                            this.props.login.token &&
                             <NavItem>
-                                <NavLink tag={Link} to="/trips">Trips</NavLink>
+                                <NavLink onClick={this.logout} href="#">Logout</NavLink>
                             </NavItem>
-                            {
-                                this.props.login.token ?
-                                    <NavItem>
-                                        <NavLink onClick={this.logout} href="#">Logout</NavLink>
-                                    </NavItem> :
-                                    ''
-                            }
-                        </Nav>
-                    </Collapse>
-                </Navbar>
-            </div>
+                        }
+                    </Nav>
+                </Collapse>
+            </Navbar>
         )
     }
 }
