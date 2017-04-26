@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import TripItem from "./TripItem";
 import {connect} from "react-redux";
 import {createTrip, fetchTrips, removeTrip} from "./action/action.types";
-import PlaceAutocomplete from "./creation/PlaceAutocomplete";
+import PlaceAutocomplete from "../places/PlaceAutocomplete";
 import {Button, Col, Form, FormGroup, Label, Modal, ModalBody, ModalFooter, ModalHeader, Table} from "reactstrap";
 
 class TripList extends Component {

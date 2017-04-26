@@ -1,6 +1,6 @@
 import {tripsReducer} from "../../trip/reducer/trips.reducer";
 import {loginReducer} from "../../auth/reducer/auth.reducer";
-import {placeReducer} from "../../trip/creation/reducer/place.reducer";
+import {placeReducer} from "../../places/reducer/place.reducer";
 import {combineReducers} from "redux";
 
 const appReducer = combineReducers({
