@@ -2,12 +2,17 @@ import React from "react";
 import {Button} from "reactstrap";
 
 const TripItem = ({trip, onRemoveTrip}) => (
-    <div>
-        {trip.id} - {trip.text}
-        <Button onClick={() => {
-            onRemoveTrip(trip.id)
-        }}>Remove</Button>
-    </div>
+    <tr>
+        <td>{trip.id}</td>
+        <td>{trip.text}</td>
+        <td>
+            <Button onClick={() => {
+                onRemoveTrip(trip.id)
+            }}>
+                Cancel
+            </Button>
+        </td>
+    </tr>
 );
 
 export default TripItem;
