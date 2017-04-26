@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import TripItem from "./TripItem";
 import {connect} from "react-redux";
 import {createTrip, fetchTrips, removeTrip} from "./action/action.types";
-import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader, Table} from "reactstrap";
+import PlaceAutocomplete from "./creation/PlaceAutocomplete";
+import {Button, Col, Form, FormGroup, Label, Modal, ModalBody, ModalFooter, ModalHeader, Table} from "reactstrap";
 
 class TripList extends Component {
     input;
@@ -91,9 +92,24 @@ class TripList extends Component {
                     <ModalHeader toggle={this.toggle}>Find your trip</ModalHeader>
                     <ModalBody>
 
-                        <Input type="text" getRef={node => {
-                            this.input = node
-                        }}/>
+                        <Form>
+
+                            <FormGroup row>
+                                <Label sm={2}>From</Label>
+                                <Col sm={10}>
+                                    <PlaceAutocomplete host="create.from"/>
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup row>
+                                <Label sm={2}>To</Label>
+                                <Col sm={10}>
+                                    <PlaceAutocomplete host="create.to"/>
+                                </Col>
+                            </FormGroup>
+
+                        </Form>
+
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.closeCreateTripDialog}>Cancel</Button>
