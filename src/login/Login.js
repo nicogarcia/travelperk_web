@@ -3,6 +3,7 @@ import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 import {Redirect} from "react-router";
 import {connect} from "react-redux";
 import {requestLogin} from "../auth/action/auth.action";
+import {Link} from "react-router-dom";
 
 class Login extends Component {
 
@@ -63,9 +64,9 @@ class Login extends Component {
                             </FormGroup>
 
                             {
-                                login.hasFailed ? (
-                                    <Alert color="danger">Email or password incorrect</Alert>
-                                ) : ''
+                                login.hasFailed &&
+
+                                <Alert color="danger">Email or password incorrect</Alert>
                             }
 
                             <Button
@@ -79,6 +80,8 @@ class Login extends Component {
                                 }
                             </Button>
                         </Form>
+
+                        <Link to='/signup'>Not signed up yet?</Link>
 
                     </div>
                 </div>
