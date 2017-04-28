@@ -28,3 +28,39 @@
     border: 1px solid #aaa;
     border-radius: 4px;
 }
+
+.suggestion {
+    padding: 5px 5px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.suggestion:hover {
+    background: #e8e8e8;
+}
+
+.suggestion.airportWithCity {
+    padding-left: 30px;
+}
+
+.suggestion-container {
+    flex: 0 1 auto;
+}
+
+.suggestion .suggestion__icon {
+    flex: 0 0 20px;
+    color: #b6b6b6;
+    padding: 0 10px;
+    text-align: center;
+}
+
+.suggestion .suggestion__country {
+    color: #656565;
+}
+
+.suggestion .suggestion__place-name {
+    font-weight: bold;
+    color: #545454;
+}

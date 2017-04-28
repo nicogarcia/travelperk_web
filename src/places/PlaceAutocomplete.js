@@ -20,6 +20,8 @@ class Place extends Component {
         this.host = props.host;
 
         this._handleSearch = this._handleSearch.bind(this);
+
+        // TODO: Improve this? Does it have an undesired behaviour?
         this.dispatchDebounced = debounce(this.dispatchDebounced, 250);
     }
 
@@ -57,12 +59,35 @@ class Place extends Component {
                 suggestions={this.suggestions}
                 onSuggestionsFetchRequested={(text) => this._handleSearch(text)}
                 onSuggestionsClearRequested={() => {
-                    this.suggestions = [];
+                    //this.suggestions = [];
                 }}
                 getSuggestionValue={suggestion => suggestion.PlaceName}
-                renderSuggestion={suggestion => <span>{suggestion.PlaceName}</span>}
+                renderSuggestion={this.renderSuggestion}
                 inputProps={inputProps}
             />
+        );
+    }
+
+    renderSuggestion(suggestion) {
+        return (
+            <div className={suggestion.HasCity ? 'suggestion airportWithCity' : 'suggestion'}>
+                <div className="suggestion__icon">
+                    {
+                        suggestion.IsCity ?
+                            <i className="fa fa-building-o fa-2x" aria-hidden="true"></i> :
+                            <i className="fa fa-plane fa-2x" aria-hidden="true"></i>
+                    }
+                </div>
+                <div className="suggestion-container">
+                    <div className="suggestion__place-name">
+                        {suggestion.PlaceName}
+                    </div>
+                    <div className="suggestion__country">
+                        {suggestion.CountryName}
+                    </div>
+                </div>
+            </div>
+
         );
     }
 }
