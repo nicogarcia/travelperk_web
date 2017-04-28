@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 import {Redirect} from "react-router";
 import {connect} from "react-redux";
-import {requestLogin} from "../auth/action/auth.action";
+import {requestLogin} from "../auth/action/auth.login.action";
 import {Link} from "react-router-dom";
 
 class Login extends Component {

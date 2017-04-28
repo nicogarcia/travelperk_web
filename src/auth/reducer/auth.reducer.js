@@ -6,7 +6,7 @@ import {
     SIGNUP_FAILURE,
     SIGNUP_REQUEST,
     SIGNUP_SUCCESS
-} from "../action/auth.action";
+} from "../action/auth.login.action";
 
 const initialState = {
     email: null,

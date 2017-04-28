@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {requestSignup} from "../auth/action/auth.action";
+import {requestSignup} from "../auth/action/auth.signup.action";
 import {Button, Form, FormGroup, Input, Label} from "reactstrap";
 import {connect} from "react-redux";
 

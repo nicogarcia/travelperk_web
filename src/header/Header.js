@@ -3,7 +3,7 @@ import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} fro
 import {Link} from "react-router-dom";
 import logo from "./travelperk-logo-dark.svg";
 import {connect} from "react-redux";
-import {logoutRequest} from "../auth/action/auth.action";
+import {logoutRequest} from "../auth/action/auth.login.action";
 
 class Header extends Component {
     constructor(props) {
