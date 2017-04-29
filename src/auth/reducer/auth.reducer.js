@@ -1,12 +1,6 @@
-import {
-    LOGIN_FAILURE,
-    LOGIN_REQUEST,
-    LOGIN_SUCCESS,
-    LOGOUT_REQUEST,
-    SIGNUP_FAILURE,
-    SIGNUP_REQUEST,
-    SIGNUP_SUCCESS
-} from "../action/auth.login.action";
+import {LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST} from "../action/auth.login.action";
+
+import {SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS} from "../action/auth.signup.action";
 
 const initialState = {
     email: null,
@@ -44,13 +38,13 @@ export const signupReducer = (state = signupInitialState, action) => {
     switch (action.type) {
 
         case SIGNUP_REQUEST:
-            return Object.assign({}, initialState, {email: action.payload.email, isPending: true});
+            return Object.assign({}, signupInitialState, {email: action.payload.email, isPending: true});
 
         case SIGNUP_SUCCESS:
             return Object.assign({}, state, {isPending: false, hasFailed: false});
 
         case SIGNUP_FAILURE:
-            return Object.assign({}, state, {isPending: false, hasFailed: true});
+            return Object.assign({}, state, {isPending: false, hasFailed: true, errors: action.payload.error});
 
         default:
             return state;

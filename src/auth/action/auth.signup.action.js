@@ -1,5 +1,6 @@
 import {Api} from "../../app/api";
-import {loginRequest} from "./auth.login.action";
+import {requestLogin} from "./auth.login.action";
+import {history} from "react-router-dom";
 
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
 export const signupRequest = (email, password) => (
@@ -23,11 +24,11 @@ export const signupSuccess = (email, password) => (
 );
 
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
-export const signupFailure = (email, password) => (
+export const signupFailure = (error) => (
     {
         type: SIGNUP_FAILURE,
         payload: {
-            email
+            error
         }
     }
 );
@@ -40,10 +41,12 @@ export const requestSignup = (email, password) => {
 
         fetchPromise
             .then(res => {
-                signupSuccess(res.data.email);
-                loginRequest(email, password);
+                dispatch(signupSuccess(res.data.email));
+                requestLogin(email, password);
             })
-            .catch(res => signupFailure(res.data.error));
+            .catch(res => {
+                dispatch(signupFailure(res.response.data));
+            });
 
         return fetchPromise;
     }

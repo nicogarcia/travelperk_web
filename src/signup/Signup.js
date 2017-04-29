@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {requestSignup} from "../auth/action/auth.signup.action";
-import {Button, Form, FormGroup, Input, Label} from "reactstrap";
+import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 import {connect} from "react-redux";
 
 class Signup extends Component {
@@ -46,6 +46,17 @@ class Signup extends Component {
                                        value={this.state.password}
                                        onChange={e => this.setState({password: e.target.value})}/>
                             </FormGroup>
+
+                            {
+                                signup.hasFailed &&
+                                (<div>
+                                    {
+                                        Object.keys(signup.errors).map((key, value) => (
+                                            <Alert key={key} color="danger">{key} is invalid</Alert>
+                                        ))
+                                    }
+                                </div>)
+                            }
 
                             <Button
                                 color="primary"
