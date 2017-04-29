@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Autosuggest from "react-autosuggest";
-import {fetchPlaces} from "./action/place.action";
+import {fetchPlaces, selectPlaceAction} from "./action/place.action";
 import {connect} from "react-redux";
 import debounce from "lodash/debounce";
 
@@ -26,7 +26,7 @@ class Place extends Component {
     }
 
     _handleSearch(query) {
-        if (!query) {
+        if (!query || query.value.length < 2) {
             return;
         }
 
@@ -43,10 +43,14 @@ class Place extends Component {
         });
     };
 
+    onSuggestionSelected = (event, {suggestion}) => {
+        this.props.dispatch(selectPlaceAction(suggestion, this.host));
+    };
+
     render() {
         const places = this.props.places;
 
-        this.suggestions = places[this.host] ? places[this.host].items : [];
+        this.suggestions = places[this.host] && places[this.host].items ? places[this.host].items : [];
 
         const inputProps = {
             placeholder: 'Type a place',
@@ -57,9 +61,10 @@ class Place extends Component {
         return (
             <Autosuggest
                 suggestions={this.suggestions}
+                onSuggestionSelected={this.onSuggestionSelected}
                 onSuggestionsFetchRequested={(text) => this._handleSearch(text)}
                 onSuggestionsClearRequested={() => {
-                    //this.suggestions = [];
+                    this.suggestions = [];
                 }}
                 getSuggestionValue={suggestion => suggestion.PlaceName}
                 renderSuggestion={this.renderSuggestion}
