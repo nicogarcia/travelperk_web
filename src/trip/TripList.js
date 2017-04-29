@@ -2,8 +2,7 @@ import React, {Component} from "react";
 import TripItem from "./TripItem";
 import {connect} from "react-redux";
 import {createTrip, fetchTrips, removeTrip} from "./action/action.types";
-import PlaceAutocomplete from "../places/PlaceAutocomplete";
-import {Button, Col, Form, FormGroup, Label, Modal, ModalBody, ModalFooter, ModalHeader, Table} from "reactstrap";
+import {Table} from "reactstrap";
 
 class TripList extends Component {
     input;
@@ -17,8 +16,6 @@ class TripList extends Component {
 
         this.createTrip = this.createTrip.bind(this);
         this.removeTrip = this.removeTrip.bind(this);
-        this.openCreateTripDialog = this.openCreateTripDialog.bind(this);
-        this.closeCreateTripDialog = this.closeCreateTripDialog.bind(this);
     }
 
     componentDidMount() {
@@ -43,25 +40,12 @@ class TripList extends Component {
         this.props.dispatch(removeTrip(id))
     }
 
-    openCreateTripDialog() {
-        this.setState({createModalOpened: true});
-    }
-
-    closeCreateTripDialog() {
-        this.setState({createModalOpened: false});
-    }
-
     render() {
         const {trips} = this.props;
-        const {createModalOpened} = this.state;
 
         return (
-            <div>
+            <div className="container-fluid">
                 <h2>Trips</h2>
-
-                <Button onClick={this.openCreateTripDialog}>
-                    New Trip
-                </Button>
 
                 <hr />
 
@@ -87,35 +71,6 @@ class TripList extends Component {
                     }
                     </tbody>
                 </Table>
-
-                <Modal isOpen={createModalOpened} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}>Find your trip</ModalHeader>
-                    <ModalBody>
-
-                        <Form>
-
-                            <FormGroup row>
-                                <Label sm={2}>From</Label>
-                                <Col sm={10}>
-                                    <PlaceAutocomplete host="create.from"/>
-                                </Col>
-                            </FormGroup>
-
-                            <FormGroup row>
-                                <Label sm={2}>To</Label>
-                                <Col sm={10}>
-                                    <PlaceAutocomplete host="create.to"/>
-                                </Col>
-                            </FormGroup>
-
-                        </Form>
-
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.closeCreateTripDialog}>Cancel</Button>
-                        <Button color="primary" onClick={this.createTrip}>Book Trip</Button>
-                    </ModalFooter>
-                </Modal>
             </div>
         );
     }
