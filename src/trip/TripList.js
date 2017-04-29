@@ -1,44 +1,25 @@
 import React, {Component} from "react";
 import TripItem from "./TripItem";
 import {connect} from "react-redux";
-import {createTrip, fetchTrips, removeTrip} from "./action/action.types";
-import {Table} from "reactstrap";
+import {fetchTrips, removeTrip} from "./action/action.types";
+import {Button, Table} from "reactstrap";
+import {openCreateModalAction} from "./create-modal/action/action.types";
+import {isEmpty} from "lodash/lang";
+
 
 class TripList extends Component {
-    input;
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            createModalOpened: false
-        };
-
-        this.createTrip = this.createTrip.bind(this);
-        this.removeTrip = this.removeTrip.bind(this);
-    }
 
     componentDidMount() {
         this.props.dispatch(fetchTrips());
     }
 
-    createTrip() {
-        if (!this.input.value.trim()) {
-            return
-        }
+    removeTripHandler = (id) => {
+        this.props.dispatch(removeTrip(id));
+    };
 
-        this.props.dispatch(createTrip({
-            id: Number.parseInt(this.input.value, 10),
-            text: `trip ${this.input.value} redux`
-        }));
-
-        this.input.value = '';
-        this.closeCreateTripDialog();
-    }
-
-    removeTrip(id) {
-        this.props.dispatch(removeTrip(id))
-    }
+    openCreateTripModal = () => {
+        this.props.dispatch(openCreateModalAction());
+    };
 
     render() {
         const {trips} = this.props;
@@ -52,21 +33,30 @@ class TripList extends Component {
                 <Table>
                     <thead>
                     <tr>
-                        <th>From</th>
-                        <th>To</th>
+                        <th>Trip N°</th>
+                        <th>Name</th>
                         <th>Action</th>
                     </tr>
                     </thead>
 
                     <tbody>
                     {
-                        trips.isFetching && <tr>
+                        trips.isFetching &&
+                        <tr>
                             <td>Cargando...</td>
                         </tr>
                     }
                     {
+                        (!trips.isFetching && isEmpty(trips.items)) &&
+                        <tr>
+                            <td>You have no trips yet,
+                                <Button color="link" onClick={this.openCreateTripModal}>create your first one</Button>
+                            </td>
+                        </tr>
+                    }
+                    {
                         Object.keys(trips.items).map(id => (
-                            <TripItem key={id} trip={trips.items[id]} onRemoveTrip={this.removeTrip}/>
+                            <TripItem key={id} trip={trips.items[id]} onRemoveTrip={this.removeTripHandler}/>
                         ))
                     }
                     </tbody>
