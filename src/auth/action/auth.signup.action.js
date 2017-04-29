@@ -43,7 +43,7 @@ export const requestSignup = (email, password) => {
                 signupSuccess(res.data.email);
                 loginRequest(email, password);
             })
-            .catch(error => signupFailure(error));
+            .catch(res => signupFailure(res.data.error));
 
         return fetchPromise;
     }

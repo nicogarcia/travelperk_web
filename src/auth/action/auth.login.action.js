@@ -45,8 +45,8 @@ export const requestLogin = (email, password) => {
         let fetchPromise = Api.post('/token', {email, password});
 
         fetchPromise
-            .then(res => dispatch(loginSuccess(res)))
-            .catch(res => dispatch(loginFailure(res)));
+            .then(res => dispatch(loginSuccess(res.data)))
+            .catch(res => dispatch(loginFailure(res.data)));
 
         return fetchPromise;
     }
