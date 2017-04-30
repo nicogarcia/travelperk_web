@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 import AppRouter from "./app/router/Router";
-import store from "./app/store/app.store";
+import store from "./app/App.store";
 import "jquery";
 /* CSS */
 import "./index.css";

@@ -1,5 +1,5 @@
-import {Api} from "../../app/api";
-import {requestLogin} from "./auth.login.action";
+import {Api} from "../app/api";
+import {requestSignIn} from "../signin/SignIn.action";
 
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
 export const signupRequest = (email, password) => (
@@ -41,7 +41,7 @@ export const requestSignup = (email, password) => {
         fetchPromise
             .then(res => {
                 dispatch(signupSuccess(res.data.email));
-                requestLogin(email, password);
+                requestSignIn(email, password);
             })
             .catch(res => {
                 dispatch(signupFailure(res.response.data));

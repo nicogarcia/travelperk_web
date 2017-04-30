@@ -1,4 +1,4 @@
-import {Api} from "../../app/api/index";
+import {Api} from "../app/api/index";
 
 export const CREATE_TRIP_REQUEST = 'CREATE_TRIP_REQUEST';
 export const createTripRequestAction = (trip) => ({

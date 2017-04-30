@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from "../store/app.store";
+import store from "../App.store";
 
 const instance = axios.create({
     baseURL: 'http://localhost:8000/v1',
@@ -7,8 +7,7 @@ const instance = axios.create({
 });
 
 store.subscribe(() => {
-    const token = store.getState().login.token;
-    console.log('token = ' + token);
+    const token = store.getState().signIn.token;
 
     if (token) {
         instance.defaults.headers.common['Authorization'] = 'JWT ' + token;

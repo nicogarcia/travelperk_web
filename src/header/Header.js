@@ -3,8 +3,8 @@ import {Button, Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavL
 import {Link} from "react-router-dom";
 import logo from "./travelperk-logo-dark.svg";
 import {connect} from "react-redux";
-import {logoutRequest} from "../auth/action/auth.login.action";
-import {openCreateModalAction} from "../trip/create-modal/action/action.types";
+import {signOutRequest} from "../signin/SignIn.action";
+import {openCreateModalAction} from "../trips/create-modal/CreateTripModal.action";
 
 class Header extends Component {
     constructor(props) {
@@ -13,20 +13,17 @@ class Header extends Component {
         this.state = {
             isOpen: false
         };
-
-        this.toggle = this.toggle.bind(this);
-        this.logout = this.logout.bind(this);
     }
 
-    toggle() {
+    toggle = () => {
         this.setState({
             isOpen: !this.state.isOpen
         });
-    }
+    };
 
-    logout() {
-        this.props.dispatch(logoutRequest())
-    }
+    signOut = () => {
+        this.props.dispatch(signOutRequest())
+    };
 
     openCreateTripDialog = () => {
         this.props.dispatch(openCreateModalAction());
@@ -44,7 +41,7 @@ class Header extends Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         {
-                            this.props.login.token &&
+                            this.props.signIn.token &&
                             <NavItem>
                                 <Button color="primary" onClick={this.openCreateTripDialog}>
                                     New Trip
@@ -53,23 +50,23 @@ class Header extends Component {
                         }
 
                         {
-                            this.props.login.token &&
+                            this.props.signIn.token &&
                             <NavItem>
                                 <NavLink tag={Link} to="/trips">Trips</NavLink>
                             </NavItem>
                         }
 
                         {
-                            this.props.login.token &&
+                            this.props.signIn.token &&
                             <NavItem>
-                                <NavLink onClick={this.logout} href="#">Logout</NavLink>
+                                <NavLink onClick={this.signOut} href="#">Sign Out</NavLink>
                             </NavItem>
                         }
 
                         {
-                            !this.props.login.token &&
+                            !this.props.signIn.token &&
                             <NavItem>
-                                <Button color="primary" tag={Link} to="/login">
+                                <Button color="primary" tag={Link} to="/signin">
                                     Sign In
                                 </Button>
                             </NavItem>
@@ -83,7 +80,7 @@ class Header extends Component {
 
 const mapStateToProps = (state) => (
     {
-        login: state.login
+        signIn: state.signIn
     }
 );
 

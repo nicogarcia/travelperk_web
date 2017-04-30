@@ -1,4 +1,4 @@
-import {CLOSE_CREATE_TRIP_MODAL, OPEN_CREATE_TRIP_MODAL} from "../action/action.types";
+import {CLOSE_CREATE_TRIP_MODAL, OPEN_CREATE_TRIP_MODAL} from "./CreateTripModal.action";
 
 const initialState = {
     opened: false

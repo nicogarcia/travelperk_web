@@ -1,4 +1,4 @@
-import {FETCH_PLACE_REQUEST, FETCH_PLACES_SUCCESS, SELECT_PLACE} from "../action/place.action";
+import {FETCH_PLACE_REQUEST, FETCH_PLACES_SUCCESS, SELECT_PLACE} from "./PlaceAutocomplete.action";
 import {merge} from "lodash/object";
 
 const initialState = {};

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {requestSignup} from "../auth/action/auth.signup.action";
+import {requestSignup} from "./SignUp.action";
 import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 import {connect} from "react-redux";
 
@@ -12,24 +12,22 @@ class Signup extends Component {
             email: '',
             password: ''
         };
-
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit(e) {
+    onSubmit = (e) => {
         e.preventDefault();
 
         this.props.dispatch(requestSignup(this.state.email, this.state.password));
-    }
+    };
 
     render() {
-        const {signup} = this.props;
+        const {signUp} = this.props;
 
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12 col-md-6 offset-md-3">
-                        <h2>Signup</h2>
+                        <h2>Sign Uup</h2>
 
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
@@ -48,10 +46,10 @@ class Signup extends Component {
                             </FormGroup>
 
                             {
-                                signup.hasFailed &&
+                                signUp.hasFailed &&
                                 (<div>
                                     {
-                                        Object.keys(signup.errors).map((key, value) => (
+                                        Object.keys(signUp.errors).map((key, value) => (
                                             <Alert key={key} color="danger">{key} is invalid</Alert>
                                         ))
                                     }
@@ -61,11 +59,11 @@ class Signup extends Component {
                             <Button
                                 color="primary"
                                 type="submit"
-                                disabled={signup.isPending}>
+                                disabled={signUp.isPending}>
                                 {
-                                    signup.isPending ?
-                                        (<span><i className='fa fa-circle-o-notch fa-spin'/> Signup</span>) :
-                                        'Signup'
+                                    signUp.isPending ?
+                                        (<span><i className='fa fa-circle-o-notch fa-spin'/> Sign Up</span>) :
+                                        'Sign Up'
                                 }
                             </Button>
                         </Form>
@@ -78,7 +76,7 @@ class Signup extends Component {
 
 const mapStateToProps = (state) => (
     {
-        signup: state.signup
+        signUp: state.signUp
     }
 );
 

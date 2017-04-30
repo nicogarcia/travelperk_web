@@ -7,11 +7,11 @@ const PrivateRoute = (props) => {
 
     return (
         <Route {...rest} render={props => (
-            rest.login.token ? (
+            rest.signIn.token ? (
                 <Component {...props}/>
             ) : (
                 <Redirect to={{
-                    pathname: '/login',
+                    pathname: '/signin',
                     state: {from: props.location}
                 }}/>
             ))
@@ -21,7 +21,7 @@ const PrivateRoute = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        login: state.login
+        signIn: state.signIn
     }
 };
 

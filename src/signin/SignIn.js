@@ -2,10 +2,10 @@ import React, {Component} from "react";
 import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 import {Redirect} from "react-router";
 import {connect} from "react-redux";
-import {requestLogin} from "../auth/action/auth.login.action";
+import {requestSignIn} from "./SignIn.action";
 import {Link} from "react-router-dom";
 
-class Login extends Component {
+class SignIn extends Component {
 
     constructor(props) {
         super(props);
@@ -14,31 +14,31 @@ class Login extends Component {
             email: '',
             password: ''
         };
-
-        this.login = this.login.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
 
-    login(event) {
+    componentWillMount() {
+        this.props.dispatch(requestSignIn('a@a.com', 'asdfasdf'));
+    }
+
+    signIn = (event) => {
         event.preventDefault();
 
-        this.props.dispatch(requestLogin(this.state.email, this.state.password));
-    }
+        this.props.dispatch(requestSignIn(this.state.email, this.state.password));
+    };
 
-    handleEmailChange(event) {
+    handleEmailChange = (event) => {
         this.setState({email: event.target.value})
-    }
+    };
 
-    handlePasswordChange(event) {
+    handlePasswordChange = (event) => {
         this.setState({password: event.target.value})
-    }
+    };
 
     render() {
         const {from} = this.props.location.state || {from: {pathname: '/'}};
-        const {login} = this.props;
+        const {signIn} = this.props;
 
-        if (login.token) {
+        if (signIn.token) {
             return (
                 <Redirect to={from}/>
             );
@@ -48,9 +48,9 @@ class Login extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12 col-md-6 offset-md-3">
-                        <h1>Login</h1>
+                        <h1>Sign In</h1>
 
-                        <Form onSubmit={this.login}>
+                        <Form onSubmit={this.signIn}>
                             <FormGroup>
                                 <Label for="email">Email</Label>
                                 <Input id="email" type="text" name="email" placeholder="Enter your email"
@@ -64,7 +64,7 @@ class Login extends Component {
                             </FormGroup>
 
                             {
-                                login.hasFailed &&
+                                signIn.hasFailed &&
 
                                 <Alert color="danger">Email or password incorrect</Alert>
                             }
@@ -72,11 +72,11 @@ class Login extends Component {
                             <Button
                                 color="primary"
                                 type="submit"
-                                disabled={login.isPending}>
+                                disabled={signIn.isPending}>
                                 {
-                                    login.isPending ?
-                                        (<span><i className='fa fa-circle-o-notch fa-spin'/> Login</span>) :
-                                        'Login'
+                                    signIn.isPending ?
+                                        (<span><i className='fa fa-circle-o-notch fa-spin'/> Sign In</span>) :
+                                        'Sign In'
                                 }
                             </Button>
                         </Form>
@@ -92,8 +92,8 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        login: state.login
+        signIn: state.signIn
     };
 };
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(SignIn);

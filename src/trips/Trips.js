@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import TripItem from "./TripItem";
+import TripDetail from "./detail/TripDetail";
 import {connect} from "react-redux";
-import {fetchTrips, removeTrip} from "./action/action.types";
+import {fetchTrips, removeTrip} from "./Trips.action";
 import {Button, Table} from "reactstrap";
-import {openCreateModalAction} from "./create-modal/action/action.types";
+import {openCreateModalAction} from "./create-modal/CreateTripModal.action";
 import {isEmpty} from "lodash/lang";
 
 
@@ -56,7 +56,7 @@ class TripList extends Component {
                     }
                     {
                         Object.keys(trips.items).map(id => (
-                            <TripItem key={id} trip={trips.items[id]} onRemoveTrip={this.removeTripHandler}/>
+                            <TripDetail key={id} trip={trips.items[id]} onRemoveTrip={this.removeTripHandler}/>
                         ))
                     }
                     </tbody>

@@ -1,18 +1,16 @@
 import React from "react";
 import {Button} from "reactstrap";
 
-const TripItem = ({trip, onRemoveTrip}) => (
+const TripDetail = ({trip, onRemoveTrip}) => (
     <tr>
         <td>{trip.id}</td>
         <td>{trip.name}</td>
         <td>
-            <Button onClick={() => {
-                onRemoveTrip(trip.id)
-            }}>
+            <Button onClick={() => onRemoveTrip(trip.id)}>
                 Remove
             </Button>
         </td>
     </tr>
 );
 
-export default TripItem;
+export default TripDetail;

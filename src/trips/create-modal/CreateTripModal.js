@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
-import {closeCreateModalAction} from "./action/action.types";
-import {createTrip} from "../action/action.types";
+import {closeCreateModalAction} from "./CreateTripModal.action";
+import {createTrip} from "../Trips.action";
 import {connect} from "react-redux";
 
 class CreateTripModal extends Component {

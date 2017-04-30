@@ -1,7 +1,6 @@
 import {applyMiddleware, compose, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
-import appReducer from "../reducer/app.reducer";
-import {autoRehydrate, persistStore} from "redux-persist";
+import appReducer from "./App.reducer";
 
 let store = createStore(
     appReducer,
@@ -10,10 +9,10 @@ let store = createStore(
         applyMiddleware(
             thunkMiddleware
         ),
-        autoRehydrate()
+        //autoRehydrate()
     )
 );
 
-persistStore(store);
+//persistStore(store);
 
 export default store;

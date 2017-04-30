@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Autosuggest from "react-autosuggest";
-import {fetchPlaces, selectPlaceAction} from "./action/place.action";
+import {fetchPlaces, selectPlaceAction} from "./PlaceAutocomplete.action";
 import {connect} from "react-redux";
 import debounce from "lodash/debounce";
 
@@ -19,19 +19,17 @@ class Place extends Component {
 
         this.host = props.host;
 
-        this._handleSearch = this._handleSearch.bind(this);
-
         // TODO: Improve this? Does it have an undesired behaviour?
         this.dispatchDebounced = debounce(this.dispatchDebounced, 250);
     }
 
-    _handleSearch(query) {
+    handleSearch = (query) => {
         if (!query || query.value.length < 2) {
             return;
         }
 
         this.dispatchDebounced(query)
-    }
+    };
 
     dispatchDebounced(query) {
         this.props.dispatch(fetchPlaces(query.value, this.host))
@@ -62,7 +60,7 @@ class Place extends Component {
             <Autosuggest
                 suggestions={this.suggestions}
                 onSuggestionSelected={this.onSuggestionSelected}
-                onSuggestionsFetchRequested={(text) => this._handleSearch(text)}
+                onSuggestionsFetchRequested={(text) => this.handleSearch(text)}
                 onSuggestionsClearRequested={() => {
                     this.suggestions = [];
                 }}

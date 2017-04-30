@@ -8,7 +8,7 @@ import {
     REMOVE_TRIP_FAILURE,
     REMOVE_TRIP_REQUEST,
     REMOVE_TRIP_SUCCESS
-} from "../action/action.types";
+} from "./Trips.action";
 
 const initialState = {
     isFetching: false,
