@@ -69,7 +69,7 @@ class Header extends Component {
                         {
                             !this.props.login.token &&
                             <NavItem>
-                                <Button color="primary">
+                                <Button color="primary" tag={Link} to="/login">
                                     Sign In
                                 </Button>
                             </NavItem>
