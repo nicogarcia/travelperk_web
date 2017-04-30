@@ -1,6 +1,5 @@
 import {Api} from "../../app/api";
 import {requestLogin} from "./auth.login.action";
-import {history} from "react-router-dom";
 
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
 export const signupRequest = (email, password) => (
