@@ -1,41 +1,41 @@
 import {
-    CREATE_TRIP,
+    CREATE_TRIP_FAILURE,
+    CREATE_TRIP_REQUEST,
+    CREATE_TRIP_SUCCESS,
     FETCH_TRIPS_FAILED,
     FETCH_TRIPS_REQUEST,
     FETCH_TRIPS_SUCCESS,
-    REMOVE_TRIP
+    REMOVE_TRIP_FAILURE,
+    REMOVE_TRIP_REQUEST,
+    REMOVE_TRIP_SUCCESS
 } from "../action/action.types";
 
 const initialState = {
     isFetching: false,
-    didInvalidate: false,
-    items: {}
+    items: []
 };
 
 export function tripsReducer(state = initialState, action) {
     switch (action.type) {
-        case CREATE_TRIP:
-            let id = action.payload.id;
+        case CREATE_TRIP_REQUEST:
+            return Object.assign({}, state, {isCreating: true});
 
-            if (state.items[id]) {
-                return state;
-            }
+        case CREATE_TRIP_SUCCESS:
+        case CREATE_TRIP_FAILURE:
+            return Object.assign({}, state, {isCreating: false});
 
-            let items = state.items;
-            items[id] = action.payload;
+        case REMOVE_TRIP_REQUEST:
+            return Object.assign({}, state, {isDeleting: false});
 
-            return Object.assign({}, state, {items: items});
-
-        case REMOVE_TRIP:
-            let stateCopy = Object.assign({}, state);
-            delete stateCopy.items[action.payload];
-            return stateCopy;
+        case REMOVE_TRIP_SUCCESS:
+        case REMOVE_TRIP_FAILURE:
+            return Object.assign({}, state, {isDeleting: false});
 
         case FETCH_TRIPS_REQUEST:
-            return Object.assign({}, state, {isFetching: true, didInvalidate: false});
+            return Object.assign({}, state, {isFetching: true});
 
         case FETCH_TRIPS_SUCCESS:
-            return Object.assign({}, state, {isFetching: false, didInvalidate: false, items: action.payload});
+            return Object.assign({}, state, {isFetching: false, items: action.payload});
 
         case FETCH_TRIPS_FAILED:
             return Object.assign({}, state, {isFetching: false});

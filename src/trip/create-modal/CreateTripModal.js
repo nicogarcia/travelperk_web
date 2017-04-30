@@ -6,8 +6,6 @@ import {connect} from "react-redux";
 
 class CreateTripModal extends Component {
 
-    input;
-
     constructor(props) {
         super(props);
 
@@ -27,7 +25,10 @@ class CreateTripModal extends Component {
             return
         }
 
-        this.props.dispatch(createTrip({name: this.state.value}));
+        this.props.dispatch(createTrip(
+            {name: this.state.value},
+            () => this.props.dispatch(closeCreateModalAction())
+        ));
 
         this.setState({value: ''});
     };
