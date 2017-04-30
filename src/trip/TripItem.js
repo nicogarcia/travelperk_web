@@ -4,12 +4,12 @@ import {Button} from "reactstrap";
 const TripItem = ({trip, onRemoveTrip}) => (
     <tr>
         <td>{trip.id}</td>
-        <td>{trip.text}</td>
+        <td>{trip.name}</td>
         <td>
             <Button onClick={() => {
                 onRemoveTrip(trip.id)
             }}>
-                Cancel
+                Remove
             </Button>
         </td>
     </tr>
