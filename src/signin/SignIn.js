@@ -17,7 +17,7 @@ class SignIn extends Component {
     }
 
     componentWillMount() {
-        this.props.dispatch(requestSignIn('a@a.com', 'asdfasdf'));
+        // this.props.dispatch(requestSignIn('a@a.com', 'asdfasdf'));
     }
 
     signIn = (event) => {

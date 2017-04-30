@@ -27,7 +27,7 @@ class Signup extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12 col-md-6 offset-md-3">
-                        <h2>Sign Uup</h2>
+                        <h2>Sign Up</h2>
 
                         <Form onSubmit={this.onSubmit}>
                             <FormGroup>
