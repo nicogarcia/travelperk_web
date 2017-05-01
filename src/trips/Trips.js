@@ -35,6 +35,8 @@ class TripList extends Component {
                     <tr>
                         <th>Trip N°</th>
                         <th>Name</th>
+                        <th>From</th>
+                        <th>To</th>
                         <th>Action</th>
                     </tr>
                     </thead>

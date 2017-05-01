@@ -3,6 +3,7 @@ import {Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFoote
 import {closeCreateModalAction} from "./CreateTripModal.action";
 import {createTrip} from "../Trips.action";
 import {connect} from "react-redux";
+import PlaceAutocomplete from "../../places/PlaceAutocomplete";
 
 class CreateTripModal extends Component {
 
@@ -10,7 +11,9 @@ class CreateTripModal extends Component {
         super(props);
 
         this.state = {
-            value: ''
+            value: '',
+            toPlace: null,
+            fromPlace: null
         };
     }
 
@@ -26,11 +29,15 @@ class CreateTripModal extends Component {
         }
 
         this.props.dispatch(createTrip(
-            {name: this.state.value},
+            {
+                name: this.state.value,
+                from_place: this.state.fromPlace && this.state.fromPlace.PlaceId,
+                to_place: this.state.toPlace && this.state.toPlace.PlaceId
+            },
             () => this.props.dispatch(closeCreateModalAction())
         ));
 
-        this.setState({value: ''});
+        this.setState({value: '', toPlace: null, fromPlace: null});
     };
 
     render() {
@@ -44,6 +51,22 @@ class CreateTripModal extends Component {
                             <Label sm={2}>Name</Label>
                             <Col sm={10}>
                                 <Input value={this.state.value} onChange={e => this.setState({value: e.target.value})}/>
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <Label sm={2}>From</Label>
+                            <Col sm={10}>
+                                <PlaceAutocomplete host="create.from"
+                                                   onSelected={place => this.setState({fromPlace: place})}/>
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <Label sm={2}>To</Label>
+                            <Col sm={10}>
+                                <PlaceAutocomplete host="create.to"
+                                                   onSelected={place => this.setState({toPlace: place})}/>
                             </Col>
                         </FormGroup>
                     </ModalBody>
