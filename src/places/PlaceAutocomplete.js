@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Autosuggest from "react-autosuggest";
-import {fetchPlaces, selectPlaceAction} from "./PlaceAutocomplete.action";
+import {createPlacesHostAction, fetchPlaces} from "./PlaceAutocomplete.action";
 import {connect} from "react-redux";
 import debounce from "lodash/debounce";
 
@@ -42,13 +42,13 @@ class Place extends Component {
     };
 
     onSuggestionSelected = (event, {suggestion}) => {
-        this.props.dispatch(selectPlaceAction(suggestion, this.host));
+        this.props.onSelected && this.props.onSelected(suggestion);
     };
 
     render() {
-        const places = this.props.places;
+        const hostPlaces = this.props.places[this.host];
 
-        this.suggestions = places[this.host] && places[this.host].items ? places[this.host].items : [];
+        this.suggestions = (hostPlaces && hostPlaces.items) || [];
 
         const inputProps = {
             placeholder: 'Type a place',

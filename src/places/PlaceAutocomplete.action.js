@@ -25,17 +25,6 @@ export const fetchAirportsSuccessAction = (items, host) => (
     }
 );
 
-export const SELECT_PLACE = 'SELECT_PLACE';
-export const selectPlaceAction = (place, host) => (
-    {
-        type: SELECT_PLACE,
-        payload: {
-            place,
-            host
-        }
-    }
-);
-
 const parsePlaces = (places) => {
     // All airports have city, if it has no city, then is not airport; no city, then is country
     let airportsAndCities = filter(places, e => e.CityId !== '-sky');
