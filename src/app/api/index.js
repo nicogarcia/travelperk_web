@@ -1,8 +1,9 @@
 import axios from "axios";
 import store from "../App.store";
+import config from "../env/env.config";
 
 const instance = axios.create({
-    baseURL: 'http://localhost:8000/v1',
+    baseURL: config.API_URL,
     timeout: 4000
 });
 

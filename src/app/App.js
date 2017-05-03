@@ -19,6 +19,7 @@ const App = () => (
             <Route path="/signin" component={SignIn}/>
             <Route path="/signup" component={Signup}/>
             <PrivateRoute path="/trips" component={Trips}/>
+            <Redirect from="*" to="/trips"/>
         </Switch>
 
         <CreateTripModal />
