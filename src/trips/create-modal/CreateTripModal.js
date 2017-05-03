@@ -1,5 +1,17 @@
 import React, {Component} from "react";
-import {Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {
+    Alert,
+    Button,
+    Col,
+    Form,
+    FormGroup,
+    Input,
+    Label,
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader
+} from "reactstrap";
 import {closeCreateModalAction} from "./CreateTripModal.action";
 import {createTrip} from "../Trips.action";
 import {connect} from "react-redux";
@@ -24,10 +36,6 @@ class CreateTripModal extends Component {
     createTripHandler = (e) => {
         e.preventDefault();
 
-        if (!this.state.value.trim()) {
-            return
-        }
-
         this.props.dispatch(createTrip(
             {
                 name: this.state.value,
@@ -41,6 +49,8 @@ class CreateTripModal extends Component {
     };
 
     render() {
+        const trips = this.props.trips;
+
         return (
             <Modal isOpen={this.props.createTripModal.opened}>
                 <ModalHeader>Create a new trip</ModalHeader>
@@ -69,11 +79,32 @@ class CreateTripModal extends Component {
                                                    onSelected={place => this.setState({toPlace: place})}/>
                             </Col>
                         </FormGroup>
+
+                        {
+                            trips.hasFailed && trips.errors.status_code !== 500 &&
+                            (<div>
+                                {
+                                    Object.keys(trips.errors).map((key, value) => (
+                                        <Alert key={key} color="danger">{key} is invalid</Alert>
+                                    ))
+                                }
+                            </div>)
+                        }
+
                     </ModalBody>
 
                     <ModalFooter>
                         <Button color="secondary" onClick={this.closeCreateTripModal}>Cancel</Button>
-                        <Button color="primary" type="submit">Create trip</Button>
+                        <Button
+                            color="primary"
+                            type="submit"
+                            disabled={trips.isCreating}>
+                            {
+                                trips.isCreating ?
+                                    (<span><i className='fa fa-circle-o-notch fa-spin'/> Create trip</span>) :
+                                    'Create trip'
+                            }
+                        </Button>
                     </ModalFooter>
                 </Form>
             </Modal>
@@ -82,7 +113,8 @@ class CreateTripModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    createTripModal: state.createTripModal
+    createTripModal: state.createTripModal,
+    trips: state.trips
 });
 
 export default connect(mapStateToProps)(CreateTripModal);

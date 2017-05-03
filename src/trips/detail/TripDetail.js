@@ -6,9 +6,17 @@ const TripDetail = ({trip, onRemoveTrip}) => (
         <td>{trip.id}</td>
         <td>{trip.name}</td>
 
-        {/* TODO: Fix this dirty transform */}
-        <td>{trip.from_place && trip.from_place.replace('-sky', '')}</td>
-        <td>{trip.to_place && trip.to_place.replace('-sky', '')}</td>
+        {/* TODO: Fix these dirty transforms */}
+        <td>
+            {
+                (trip.from_place && trip.from_place.replace('-sky', '')) || '-'
+            }
+        </td>
+        <td>
+            {
+                (trip.to_place && trip.to_place.replace('-sky', '')) || '-'
+            }
+        </td>
 
         <td>
             <Button onClick={() => onRemoveTrip(trip.id)}>
