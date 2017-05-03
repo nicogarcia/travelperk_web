@@ -33,7 +33,7 @@ class TripList extends Component {
                 <Table>
                     <thead>
                     <tr>
-                        <th>Trip N°</th>
+                        <th>Trip ID</th>
                         <th>Name</th>
                         <th>From</th>
                         <th>To</th>

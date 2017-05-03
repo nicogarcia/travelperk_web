@@ -73,7 +73,7 @@ class CreateTripModal extends Component {
 
                     <ModalFooter>
                         <Button color="secondary" onClick={this.closeCreateTripModal}>Cancel</Button>
-                        <Button color="primary" type="submit">Book Trip</Button>
+                        <Button color="primary" type="submit">Create trip</Button>
                     </ModalFooter>
                 </Form>
             </Modal>
