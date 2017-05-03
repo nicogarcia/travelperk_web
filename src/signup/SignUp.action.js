@@ -41,10 +41,10 @@ export const requestSignup = (email, password) => {
         fetchPromise
             .then(res => {
                 dispatch(signupSuccess(res.data.email));
-                requestSignIn(email, password);
+                dispatch(requestSignIn(email, password));
             })
             .catch(res => {
-                dispatch(signupFailure(res.response.data));
+                dispatch(signupFailure(res.response));
             });
 
         return fetchPromise;

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {requestSignup} from "./SignUp.action";
 import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 import {connect} from "react-redux";
+import {Redirect} from "react-router";
 
 class Signup extends Component {
 
@@ -21,7 +22,13 @@ class Signup extends Component {
     };
 
     render() {
-        const {signUp} = this.props;
+        const {signUp, signIn} = this.props;
+
+        if (signIn.token) {
+            return (
+                <Redirect to="/trips"/>
+            );
+        }
 
         return (
             <div className="container">
@@ -46,10 +53,10 @@ class Signup extends Component {
                             </FormGroup>
 
                             {
-                                signUp.hasFailed &&
+                                signUp.hasFailed && signUp.errors.status_code !== 500 &&
                                 (<div>
                                     {
-                                        Object.keys(signUp.errors).map((key, value) => (
+                                        Object.keys(signUp.errors.data).map((key, value) => (
                                             <Alert key={key} color="danger">{key} is invalid</Alert>
                                         ))
                                     }
@@ -76,7 +83,8 @@ class Signup extends Component {
 
 const mapStateToProps = (state) => (
     {
-        signUp: state.signUp
+        signUp: state.signUp,
+        signIn: state.signIn
     }
 );
 
