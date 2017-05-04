@@ -6,7 +6,7 @@ before_script:
   - npm install -g react-scripts
 
 script:
-  - npm build
+  - npm run build
 
 deploy:
   provider: firebase
