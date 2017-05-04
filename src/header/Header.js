@@ -6,6 +6,8 @@ import {connect} from "react-redux";
 import {signOutRequest} from "../signin/SignIn.action";
 import {openCreateModalAction} from "../trips/create-modal/CreateTripModal.action";
 
+import "./Header.css";
+
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -31,7 +33,7 @@ class Header extends Component {
 
     render() {
         return (
-            <Navbar color="faded" light toggleable>
+            <Navbar className="Header" light toggleable>
                 <NavbarToggler right onClick={this.toggle}/>
 
                 <NavbarBrand tag={Link} to="/trips">

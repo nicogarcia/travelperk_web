@@ -5,7 +5,7 @@ import {fetchTrips, removeTrip} from "./Trips.action";
 import {Button, Table} from "reactstrap";
 import {openCreateModalAction} from "./create-modal/CreateTripModal.action";
 import {isEmpty} from "lodash/lang";
-
+import "./Trips.css";
 
 class TripList extends Component {
 
@@ -25,12 +25,12 @@ class TripList extends Component {
         const {trips} = this.props;
 
         return (
-            <div className="container-fluid">
+            <div className="Trips container-fluid">
                 <h2>Trips</h2>
 
                 <hr />
 
-                <Table>
+                <Table className="trips-table">
                     <thead>
                     <tr>
                         <th>Trip ID</th>
