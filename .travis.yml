@@ -1,18 +1,23 @@
 language: node_js
 node_js:
-  - "node"
+  - node
+
+branches:
+  only:
+    master
+
+env:
+  secure: DpDMdMXkJ/rOZ7OyUpourj0RMCL7fTY4AZXWmxSigVQLPEZ9TeE42TZ+vbfM9dd4yMmgL2iwQ/9zhvkK4n8mGUszYU1aiKcyrDqjpXDMT+vqNcu0BlD+bI/r3T0M/UPKDHvy8COmxr6OSGdWHvmhTA5bVFW2FiTxsce85I/wASOUP7Km8eu+Ut3gzOwX72g03odp6MRMFhZ9Y9k5RFTJvSlgfjDw3hXKGsHCJ/Vi6PWrfDBeN9g0IsvQgB7fC2vFcUpJ5u18M7NEC++voqkV+DtR51KxrQrvl2ckbpCjUHHwADTwfqyYIER0zHE7yB8JgoPewHXwZijbI/QXTiC0GN701YfQIp+55qlKgpstjmia2nYZNsPNPzlrpl2exovO4BKaC9qey9TsRO25hcRZYE4EK3meE0qm1FXs4B59geYEy6I4XQUVPMZjPR86T3X8I3uzLPYDsxZYOtw0TcGC/brih7RdK2VTeJKNl1aoTmDWDciuBRa09tqwNueFgO/+yFNgmjjYPwvq1uz2eEI/Me83DYxs6c6d1+cfNqjPx94kf3r1HHQQVM0ncvwWZ2ICMpzutxzqX85A6i7gB51C8OIIXBCY7KcGGEeCuSXXzqq3umCpRI04hTO7QGQ9qvP8pYj5/2chEPIB8ag3y7q2UoRxiYg/EErDMQ+05bRII+Q=
 
 before_script:
   - npm install -g react-scripts
+  - npm install -g firebase-tools
 
 script:
   - npm run build
 
-deploy:
-  provider: firebase
-  token:
-    secure: Zr0KdTRTcvL70+LO5EeYaorcNBUrGdc8aNcWo8KEr/jx+aYD3FV+6hexf+bJ4JMdo+eez3c67umDoE0Hbkugee4lN44kW1tlr037c45GgkrWWfKwve70gkpQPdeSN0N5W8N1i+4VWeTjnsxq3g1qFrTd+TIHuJdA0XXyzSkDGlYaSC6S1xOlorlgzRnnepwGAztgr8VBCMUPlXga4Wbn5Ghy1PH9zIwPvlmo0yjD490eJJw9crRFK6jNgeQrqEvzLjaAczNEYgqh9oUZT9MUtM9CtSXpBtSsHfupSHurltQtaoS5vvEVs+EZ+hQ+mvyoExWTyAXWCkQYQ5aJtMHQZ2dgVRmoBf0u2J4u4C44frFUJadGbCm0kXpqEHzf45jcj2klirL2lWr6CRTu0E1XUkiQJtxC95ysmI7gQWxHa9Macs+EEfb9p+qyA4Rsx8Ibv9AUiB/RvZRkYMevVjfqY+IIgPly9qu4sZhy+QQS0wu/PfOAFh1FsCvoFFCP6u8OX3XnYU3TZOB/ZTI0kRYPzY9R2CBnpiaBrDEexZziskOco16BLsyB0AnlxFoTXEupW1C7zPRqjQbk5ZFhSQ5c7E+eSiRmye0IjqkgJ97t7RcI0zAz7CxZNjZC17IaBZnaIZ6hV7VdyMuuJ3WJe4eX1VqVAlWweQ/57Yd4K88mHb8=
-  project: travelperk-f88f5
+after_success:
+  - firebase deploy --token $FIREBASE_TOKEN
 
 cache:
   directories:
